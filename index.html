@@ -1,404 +1,803 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/icon" href="favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Umme Salma Portfolio website</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/font-awesome.css">
-    <link rel="stylesheet" href="css/styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Umme Salma — AI &amp; Automation Engineer</title>
+<meta name="description" content="Umme Salma — Software / AI Application Developer building agentic automation systems in Python.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1B2D;
+    --bg-alt:#0C1626;
+    --card:#152743;
+    --card-hover:#1A2E4E;
+    --line: rgba(198,216,235,0.14);
+    --line-strong: rgba(198,216,235,0.28);
+    --ink:#DDE7F2;
+    --ink-dim:#8CA0BA;
+    --ink-faint:#5C7089;
+    --accent:#FF8A3D;
+    --accent-soft: rgba(255,138,61,0.14);
+    --mint:#6FCF97;
+    --mint-soft: rgba(111,207,151,0.14);
+    --radius: 3px;
+    --maxw: 1100px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--line) 1px, transparent 1px) 0 0/48px 48px,
+      linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0/48px 48px,
+      var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+  h1,h2,h3,h4{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  /* eyebrow / labels */
+  .tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+  }
+  .tag::before{
+    content:"";
+    width:7px; height:7px;
+    border:1px solid var(--accent);
+    transform:rotate(45deg);
+    flex-shrink:0;
+  }
+
+  /* NAV */
+  header{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter: blur(10px);
+    background:rgba(15,27,45,0.85);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:var(--maxw); margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px; color:var(--ink); letter-spacing:0.02em;
+  }
+  .brand span{color:var(--accent);}
+  .navlinks{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
+  .navlinks a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    color:var(--ink-dim);
+    position:relative;
+    padding-bottom:3px;
+    transition:color .2s ease;
+  }
+  .navlinks a:hover{color:var(--ink);}
+  .navlinks a::after{
+    content:"";
+    position:absolute; left:0; bottom:0; width:0; height:1px;
+    background:var(--accent); transition:width .25s ease;
+  }
+  .navlinks a:hover::after{width:100%;}
+  .navtoggle{display:none;}
+
+  /* HERO */
+  .hero{
+    padding:100px 0 80px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap:48px;
+    align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(38px, 5.4vw, 64px);
+    line-height:1.05;
+    margin-top:14px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--accent);
+  }
+  .hero-role{
+    margin-top:16px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:15px;
+    color:var(--ink-dim);
+  }
+  .hero-desc{
+    margin-top:20px;
+    max-width:520px;
+    color:var(--ink-dim);
+    font-size:16px;
+  }
+  .hero-metrics{
+    display:flex;
+    gap:32px;
+    margin-top:34px;
+    flex-wrap:wrap;
+  }
+  .metric .num{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:28px; font-weight:700; color:var(--ink);
+  }
+  .metric .lbl{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; color:var(--ink-faint);
+    text-transform:uppercase; letter-spacing:0.08em;
+    margin-top:2px;
+  }
+  .cta-row{
+    display:flex; gap:14px; margin-top:36px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.03em;
+    padding:12px 20px;
+    border-radius:var(--radius);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:all .2s ease;
+    border:1px solid var(--line-strong);
+  }
+  .btn-primary{
+    background:var(--accent);
+    color:#0F1B2D;
+    border-color:var(--accent);
+    font-weight:600;
+  }
+  .btn-primary:hover{
+    background:#ffa564;
+  }
+  .btn-ghost{
+    color:var(--ink);
+  }
+  .btn-ghost:hover{
+    border-color:var(--ink-dim);
+    background:rgba(255,255,255,0.03);
+  }
+
+  /* schematic diagram */
+  .schematic{
+    position:relative;
+    aspect-ratio: 1/1;
+    max-width:440px;
+    margin:0 auto;
+  }
+  .schematic svg{width:100%; height:100%;}
+  .node-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    fill:var(--ink-dim);
+    letter-spacing:0.04em;
+  }
+  .node-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:9px;
+    fill:var(--ink-faint);
+  }
+  .flow-line{
+    stroke:var(--line-strong);
+    stroke-width:1.4;
+    fill:none;
+    stroke-dasharray:5 5;
+    animation:dash 22s linear infinite;
+  }
+  @keyframes dash{ to{ stroke-dashoffset:-400; } }
+  .node-box{
+    fill:var(--card);
+    stroke:var(--line-strong);
+    stroke-width:1.2;
+  }
+  .node-box.active{
+    stroke:var(--accent);
+  }
+  .node-box.done{
+    stroke:var(--mint);
+  }
+  .pulse{
+    fill:var(--accent);
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:1;}
+    50%{opacity:.35;}
+  }
+
+  /* SECTIONS */
+  section{padding:88px 0; border-bottom:1px solid var(--line);}
+  .section-head{
+    margin-bottom:44px;
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .section-head h2{
+    font-size:clamp(26px,3vw,36px);
+    margin-top:10px;
+  }
+  .section-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    color:var(--ink-faint);
+  }
+
+  /* ABOUT */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap:56px;
+  }
+  .about-grid p{color:var(--ink-dim); margin:0 0 16px;}
+  .about-grid p:last-child{margin-bottom:0;}
+  .spec-list{
+    border-top:1px solid var(--line);
+  }
+  .spec-row{
+    display:flex;
+    justify-content:space-between;
+    gap:16px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+  }
+  .spec-row .k{color:var(--ink-faint); text-transform:uppercase; letter-spacing:0.06em; font-size:11px;}
+  .spec-row .v{color:var(--ink); text-align:right;}
+
+  /* SKILLS */
+  .skills-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .skill-card{
+    background:var(--bg-alt);
+    padding:26px 22px;
+  }
+  .skill-card h3{
+    font-size:14px;
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--accent);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:14px;
+  }
+  .skill-card ul{
+    list-style:none; margin:0; padding:0;
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .skill-card li{
+    font-size:13.5px;
+    color:var(--ink-dim);
+    padding-left:14px;
+    position:relative;
+  }
+  .skill-card li::before{
+    content:"—";
+    position:absolute; left:0; color:var(--ink-faint);
+  }
+
+  /* EXPERIENCE */
+  .exp-block{
+    display:grid;
+    grid-template-columns: 260px 1fr;
+    gap:40px;
+  }
+  .exp-side{
+    border-right:1px solid var(--line);
+    padding-right:30px;
+  }
+  .exp-side .role{font-size:20px; margin-bottom:6px;}
+  .exp-side .org{color:var(--accent); font-family:'IBM Plex Mono', monospace; font-size:13px; margin-bottom:14px;}
+  .exp-side .dates{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--ink-faint);
+    display:inline-block;
+    padding:5px 10px;
+    border:1px solid var(--line-strong);
+    border-radius:var(--radius);
+  }
+  .exp-bullets{
+    list-style:none; margin:0; padding:0;
+    display:flex; flex-direction:column; gap:18px;
+  }
+  .exp-bullets li{
+    padding-left:24px;
+    position:relative;
+    color:var(--ink-dim);
+    font-size:15px;
+  }
+  .exp-bullets li::before{
+    content:"";
+    position:absolute; left:0; top:8px;
+    width:9px; height:9px;
+    border:1.4px solid var(--accent);
+    transform:rotate(45deg);
+  }
+  .exp-bullets b{color:var(--ink); font-weight:600;}
+
+  /* PROJECTS */
+  .proj-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .proj-card{
+    background:var(--bg-alt);
+    padding:30px;
+    display:flex;
+    flex-direction:column;
+    transition:background .25s ease;
+  }
+  .proj-card:hover{background:var(--card-hover);}
+  .proj-top{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    margin-bottom:16px;
+  }
+  .proj-domain{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:0.07em;
+    color:var(--mint);
+    background:var(--mint-soft);
+    padding:4px 8px;
+    border-radius:var(--radius);
+  }
+  .proj-index{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+  }
+  .proj-card h3{font-size:19px; margin-bottom:12px;}
+  .proj-card p{
+    color:var(--ink-dim); font-size:14.5px; margin:0 0 18px;
+    flex-grow:1;
+  }
+  .proj-tech{
+    display:flex; flex-wrap:wrap; gap:8px;
+  }
+  .proj-tech span{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-faint);
+    border:1px solid var(--line-strong);
+    padding:4px 9px;
+    border-radius:var(--radius);
+  }
+
+  /* CERTS */
+  .cert-list{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px 40px;
+  }
+  .cert-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .cert-row .name{font-size:15px; color:var(--ink);}
+  .cert-row .org{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-faint);
+  }
+
+  /* EDUCATION */
+  .edu-row{
+    display:grid;
+    grid-template-columns:140px 1fr;
+    gap:24px;
+    padding:22px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .edu-row .yr{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; color:var(--accent);
+  }
+  .edu-row h3{font-size:18px; margin-bottom:6px;}
+  .edu-row p{margin:0; color:var(--ink-dim); font-size:14px;}
+  .edu-row .coursework{
+    margin-top:10px; font-size:12.5px; color:var(--ink-faint); font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* CONTACT */
+  .contact-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .contact-grid h2{font-size:clamp(28px,4vw,44px); line-height:1.1;}
+  .contact-list{
+    display:flex; flex-direction:column; gap:0;
+    border-top:1px solid var(--line);
+  }
+  .contact-item{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 0; border-bottom:1px solid var(--line);
+    transition:padding-left .2s ease;
+  }
+  .contact-item:hover{padding-left:8px;}
+  .contact-item .k{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--ink-faint);
+  }
+  .contact-item .v{font-size:15px; color:var(--ink);}
+  .contact-item .arrow{color:var(--accent); opacity:0; transition:opacity .2s ease;}
+  .contact-item:hover .arrow{opacity:1;}
+
+  footer{
+    padding:30px 0;
+    text-align:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-faint);
+  }
+
+  @media (max-width: 860px){
+    .navlinks{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .schematic{order:-1; max-width:320px;}
+    .about-grid, .exp-block, .contact-grid{grid-template-columns:1fr;}
+    .exp-side{border-right:none; border-bottom:1px solid var(--line); padding-right:0; padding-bottom:20px;}
+    .skills-grid{grid-template-columns:1fr 1fr;}
+    .proj-grid{grid-template-columns:1fr;}
+    .cert-list{grid-template-columns:1fr;}
+    .edu-row{grid-template-columns:1fr;}
+  }
+</style>
 </head>
 <body>
 
-<!-- page loader start -->
-<div class="page-loader">
-   <div></div>
-   <div></div> 
-   <div></div> 
-</div>
-<!-- page loader start -->
+<header>
+  <nav>
+    <div class="brand">US<span>/</span>PORTFOLIO</div>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
 
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag">AI &amp; Automation Engineer</span>
+      <h1>Systems that <em>decide</em>,<br>not just report.</h1>
+      <div class="hero-role mono">Software / AI Application Developer — Accenture, Bengaluru</div>
+      <p class="hero-desc">I design and ship production-grade agentic systems in Python — multi-agent pipelines that evaluate real operational data and generate scored, evidence-backed decisions, not static dashboards.</p>
 
-<!-- background circles start -->
-<div class="bg-circles">
-    <div class="circle-1"></div> 
-    <div class="circle-2"></div> 
-    <div class="circle-3"></div> 
-    <div class="circle-4"></div> 
-</div>
-<!-- background circles start -->
-
-
-<!-- overlay start -->
-<div class="overlay">
-
-</div>
-<!-- overlay end -->
-  
-<!-- main start -->
-<div class="main hidden">
-
-    <!-- header start -->
-    <header class="header">
-        <div class="container">
-            <div class="row flex-end">
-                <button type="button" class="nav-toggler">
-                    <span></span>
-                </button>
-                <nav class="nav">
-                    <div class="nav-inner">
-                        <ul>
-                            <li><a href="#home" class="nav-item link-item">home</a></li>
-                            <li><a href="#about" class="nav-item link-item">about</a></li>
-                            <li><a href="#portfolio" class="nav-item link-item">projects</a></li>
-                            <li><a href="#contact" class="nav-item link-item">contact</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+      <div class="hero-metrics">
+        <div class="metric">
+          <div class="num">60–70%</div>
+          <div class="lbl">Manual effort reduced</div>
         </div>
-    </header>
-    <!-- header ends -->
-
-    <!-- home section start -->
-    <section class="home-section align-items-center" id="home">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="home-text">
-                    <p>Hello, I'm </p>
-                    <h1>Umme Salma</h1>
-                    <h2>Software Engineer</h2>
-                    <div class="bt">
-                        <a href="#about" class="btn link-item">About me</a>
-                        <a href="#portfolio" class="btn link-item">Projects</a>
-                        <a href="#contact" class="btn link-item">Contact me</a>
-                    </div>
-                    
-                </div>
-                <div class="home-img">
-                    <div class="img-box">
-                        <img src="img/profile-img.png" alt="profile-img">
-                    </div>
-                </div>
-            </div>
+        <div class="metric">
+          <div class="num">2+ yrs</div>
+          <div class="lbl">Production Python</div>
         </div>
-    </section>
-    <!-- home section end -->
-
-    <!-- About section starts -->
-    <section class="about-section sec-padding" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="section-title">
-                    <h2>about me</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="about-img">
-                    <div class="img-box">
-                        <img src="img/about-img.png" alt="about img">
-                    </div>
-                    <a href="UMME_SALMA_RESUME.pdf" target="_blank" class="btn link-item">download cv</a>
-                    <a href="#contact" class="btn link-item">contact me</a>
-                </div>
-                <div class="about-text">
-                    <p>Hello, I am Umme Salma, currently pursuing my BE in Information Science and Engineering from CMR Institute of Technology, Bengaluru. I am a quick learner and hardworking individual seeking a challenging position to establish myself as a successful individual, to accomplish goals and targets with constant efforts to expand my learning skills and knowledge.</p>
-                    <h3>skills</h3>
-                    <div class="skills">
-                        <div class="skill-item">html</div>
-                        <div class="skill-item">css</div>
-                        <div class="skill-item">javascript</div>
-                        <div class="skill-item">bootstrap</div>
-                        <div class="skill-item">php</div>
-                        <div class="skill-item">java</div>
-                        <div class="skill-item">python</div>
-                        <div class="skill-item">c++</div>
-                        <div class="skill-item">Deep Learning</div>
-                        <div class="skill-item">AIML</div>
-                    </div>
-
-                    <div class="about-tabs">
-                        <button type="button" class="tab-item active" data-target="#education">education</button>
-                        <button type="button" class="tab-item" data-target="#experience">experience</button>
-                    </div>
-
-                    <!-- Education start -->
-                    <div class="tab-content active" id="education">
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <span class="date">2020-2024</span>
-                                <h4>bachelor of engineering - <span>Information Science and Engineering</span></h4>
-                                <p>CMR Institute of Technology, Bengaluru</p>
-                                <p>8.77 CGPA</p>
-                            </div>
-                            <div class="timeline-item">
-                                <span class="date">2018-2020</span>
-                                <h4>Pre – University Course - <span>Science</span></h4>
-                                <p>Vighnan Independent PU College, Hospet</p>
-                                <p>86.6%</p>
-                            </div>
-                            <div class="timeline-item">
-                                <span class="date">2017-2018</span>
-                                <h4>SSLC <span></span></h4>
-                                <p>Little Flower Convent School, Hospet</p>
-                                <p>93.28%</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Education end -->
-
-                    <!-- Experience start -->
-                    <div class="tab-content" id="experience">
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <span class="date">Web Development</span>
-                                <h4>FrontEnd Development - <span>Backend Development</span></h4>
-                                <p>HTML | CSS | ReactJS | Javascript | NodeJs</p>
-                            </div>
-                            <div class="timeline-item">
-                                <span class="date">Databases</span>
-                                <h4> <span>Database Management System</span></h4>
-                                <p>MySQL | MongoDB </p>
-                            </div>
-                            <div class="timeline-item">
-                                <span class="date">Deep Learning</span>
-                                <h4>Data Science<span>Data Analytics</span></h4>
-                                <p>Python | Numpy | Pandas | Seaborn | Other libraries</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Experience ends -->
-                </div>
-            </div>
+        <div class="metric">
+          <div class="num">2</div>
+          <div class="lbl">Clouds in production (AWS / Azure)</div>
         </div>
-    </section>
-    <!-- About section ends -->
+      </div>
 
-    <!-- Porfolio section starts -->
-    <section class="portfolio-section sec-padding" id="portfolio">
-        <div class="container">
-            <div class="row">
-                <div class="section-title">
-                    <h2>recent work</h2>
-                </div>
-            </div>
-            <div class="row">
-                <!-- Portfolio item starts -->
-                <div class="portfolio-item">
-                    <div class="portfolio-item-thumbnail">
-                        <img src="img/portfolio/1.jpeg" alt="portfolio item thumb">
-                    </div>
-                    <h3 class="portfolio-item-title">Sentiment Analysis Using RNN</h3>
-                    <button type="button" class="btn view-project-btn">view project</button>
-                    <div class="portfolio-item-details">
-                        <div class="description">
-                            <p>Analyze the sentiment of text data, such as customer reviews or social media posts, using LSTM to determine positive, negative sentiments. Sentiment analysis, also known as opinion mining, is a natural language processing (NLP) technique used to analyze the sentiment or emotional tone expressed in a piece of text data.</p>
-                        </div>
-                        <div class="general-info">
-                            <ul>
-                                <li>Domain - <span>Data Science</span></li>
-                                <li>technologies used - <span> Python, Machine Learning</span></li>
-                                <li>GitHub link - <span><a href="https://github.com/UmmeSalma2022/Sentiment-Analysis-using-RNN" target="_blank">https://github.com/UmmeSalma2022/Sentiment-Analysis-using-RNN</a></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Portfolio item ends -->
-                <!-- Portfolio item starts -->
-                <div class="portfolio-item">
-                    <div class="portfolio-item-thumbnail">
-                        <img src="img/portfolio/3.jpeg" alt="portfolio item thumb">
-                    </div>
-                    <h3 class="portfolio-item-title">Indian Press - News API</h3>
-                    <button type="button" class="btn view-project-btn">view project</button>
-                    <div class="portfolio-item-details">
-                        <div class="description">
-                            <p>Introducing Indian Press - your go-to news companion built with ReactJS, delivering the latest updates from a myriad of reliable sources across India. With a sleek and intuitive interface, Indian Press provides an immersive news browsing experience, allowing users to stay informed about current events, politics, entertainment, sports, technology, and more, all at their fingertips.</p>
-                        </div>
-                        <div class="general-info">
-                            <ul>
-                                <li>Domain - <span>Web Development</span></li>
-                                <li>technologies used - <span> ReactJs, HTML, CSS</span></li>
-                                <li>GitHub link - <span><a href="https://github.com/UmmeSalma2022/Indian-Press---News-API" target="_blank">https://github.com/UmmeSalma2022/Indian-Press---News-API</a></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Portfolio item ends -->
-                 <!-- Portfolio item starts -->
-                 <div class="portfolio-item">
-                    <div class="portfolio-item-thumbnail">
-                        <img src="img/portfolio/2.jpeg" alt="portfolio item thumb">
-                    </div>
-                    <h3 class="portfolio-item-title">Hospital Management System</h3>
-                    <button type="button" class="btn view-project-btn">view project</button>
-                    <div class="portfolio-item-details">
-                        <div class="description">
-                            <p>Introducing our Hospital Management System (HMS), a robust solution designed to streamline operations and enhance efficiency in healthcare facilities. Leveraging the power of Database Management Systems (DBMS), our HMS offers a comprehensive suite of features to manage patient records, appointments, staff scheduling, billing, inventory, and more.</p>
-                        </div>
-                        <div class="general-info">
-                            <ul>
-                                <li>Domain - <span>DBMS</span></li>
-                                <li>technologies used - <span> MySQL, HTML, CSS</span></li>
-                                <li>GitHub link - <span><a href="https://github.com/UmmeSalma2022/Hospital-Management-System" target="_blank">https://github.com/UmmeSalma2022/Hospital-Management-System</a></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Portfolio item ends -->
-                <!-- Portfolio item starts -->
-                <div class="portfolio-item">
-                    <div class="portfolio-item-thumbnail">
-                        <img src="img/portfolio/4.jpg" alt="portfolio item thumb">
-                    </div>
-                    <h3 class="portfolio-item-title">LeisureSquare Grab-Wine</h3>
-                    <button type="button" class="btn view-project-btn">view project</button>
-                    <div class="portfolio-item-details">
-                        <div class="description">
-                            <p>Welcome to our restaurant's online hub, where culinary excellence meets digital convenience!Discover our diverse menu, meticulously curated to tantalize your taste buds and cater to every palate. From savory appetizers to indulgent main courses, sumptuous desserts, and handcrafted beverages, each dish is a masterpiece crafted with passion and precision by our talented culinary team.</p>
-                        </div>
-                        <div class="general-info">
-                            <ul>
-                                <li>Domain - <span>FrontEnd Development</span></li>
-                                <li>technologies used - <span>HTML, CSS</span></li>
-                                <li>GitHub link - <span><a href="https://github.com/UmmeSalma2022/LeisureSquare_Grab-Wine" target="_blank">https://github.com/UmmeSalma2022/LeisureSquare_Grab-Wine</a></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Portfolio item ends -->
-                <!-- Portfolio item starts -->
-                <div class="portfolio-item">
-                    <div class="portfolio-item-thumbnail">
-                        <img src="img/portfolio/5.jpeg" alt="portfolio item thumb">
-                    </div>
-                    <h3 class="portfolio-item-title">Object Detection Using YOLOv4</h3>
-                    <button type="button" class="btn view-project-btn">view project</button>
-                    <div class="portfolio-item-details">
-                        <div class="description">
-                            <p>YOLOv4 (You Only Look Once version 4) is a state-of-the-art real-time object detection algorithm that was introduced in 2020. It is an improvement over previous versions of YOLO, offering higher accuracy, faster processing times, and improved performance on small objects and crowded scenes.</p>
-                        </div>
-                        <div class="general-info">
-                            <ul>
-                                <li>Domain - <span>Data Science</span></li>
-                                <li>technologies used - <span>Python </span></li>
-                                <li>GitHub link - <span><a href="https://github.com/UmmeSalma2022/YOLOv4_Object-Detection" target="_blank">https://github.com/UmmeSalma2022/YOLOv4_Object-Detection</a></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Portfolio item ends -->
-                <!-- Portfolio item starts -->
-                <div class="portfolio-item">
-                    <div class="portfolio-item-thumbnail">
-                        <img src="img/portfolio/6.jpeg" alt="portfolio item thumb">
-                    </div>
-                    <h3 class="portfolio-item-title">Text to Speech Converter</h3>
-                    <button type="button" class="btn view-project-btn">view project</button>
-                    <div class="portfolio-item-details">
-                        <div class="description">
-                            <p>Text-to-speech (TTS) converter is a technology that enables computers to convert written text into synthesized speech. It is designed to help individuals with visual impairments, reading difficulties, or other disabilities that make it challenging to read written text.</p>
-                        </div>
-                        <div class="general-info">
-                            <ul>
-                                <li>Domain - <span>Data Science</span></li>
-                                <li>technologies used - <span>Python </span></li>
-                                <li>GitHub link - <span><a href="https://github.com/UmmeSalma2022/Text-to-Speech-Converter" target="_blank">https://github.com/UmmeSalma2022/Text-to-Speech-Converter</a></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- Portfolio item ends -->
-            </div>
-        </div>
-    </section>
-    <!-- Porfolio section ends -->
-
-    <!-- contact section starts  -->
-    <section class="contact-section sec-padding" id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="section-title">
-                    <h2>Contact me</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="contact-form">
-                    <form action="https://formsubmit.co/9b3038ff7cef57236034f0bb62df36e3" method="POST">
-                        <div class="row">
-                            <div class="input-group">
-                                <input type="text" name="name" placeholder="Name" class="input-control"required>
-                            </div>
-                            <div class="input-group">
-                                <input type="text" name="email" placeholder="Email" class="input-control"required>
-                            </div>
-                            <div class="input-group">
-                                <input type="text" name="subject" placeholder="Subject" class="input-control"required>
-                            </div>
-                            <div class="input-group">
-                                <input type="hidden" name="_captcha" value="false" >
-                            </div>
-                            <div class="input-group">
-                                <textarea placeholder="Message" name="message" class="input-control" required></textarea>
-                            </div>
-                            <div class="submit-btn">
-                                <button type="submit" class="btn">Send Message</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="contact-info">
-                    <div class="contact-info-item">
-                        <h3>Email</h3>
-                        <p>umme08394@gmail.com</p>
-                    </div>
-                    <div class="contact-info-item">
-                        <h3>Phone</h3>
-                        <p>+91 7349311043</p>
-                    </div>
-                    <div class="contact-info-item">
-                        <h3>Follow me</h3>
-                        <div class="social-links">
-                            <a href="https://api.whatsapp.com/send?phone=+917349311043" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                            <a href="https://www.linkedin.com/in/umme-salma-r/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                            <a href="https://github.com/UmmeSalma2022" target="_blank"><i class="fab fa-github"></i></a>
-                            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- contact section ends  -->
-
-</div>
-
-
-<!-- main end -->
-
-<!-- portfolio item details popup start -->
-<div class="portfolio-popup">
-    <div class="pp-inner">
-        <div class="pp-content">
-            <div class="pp-header">
-                <button type="button" class="btn pp-close"><i class="fas fa-times"></i></button>
-                <div class="pp-thumbnail">
-                    <img src="img/portfolio/3.jpg" alt="pp-thumbnail">
-                </div>
-                <h3></h3>
-            </div>
-            <div class="pp-body">
-            </div>
-        </div>
+      <div class="cta-row">
+        <a href="#projects" class="btn btn-primary">View projects →</a>
+        <a href="UMME_SALMA_RESUME.pdf" class="btn btn-ghost">Download résumé</a>
+      </div>
     </div>
-</div>
-<!-- portfolio item details popup ends -->
 
+    <div class="schematic" aria-hidden="true">
+      <svg viewBox="0 0 400 400">
+        <!-- connectors -->
+        <path class="flow-line" d="M 90 90 L 200 90 L 200 200"></path>
+        <path class="flow-line" d="M 200 200 L 200 310 L 310 310"></path>
+        <path class="flow-line" d="M 90 90 L 90 310 L 200 310"></path>
 
-<script src="js/script.js "></script>   
+        <!-- node: input -->
+        <rect class="node-box" x="40" y="60" width="100" height="60" rx="3"></rect>
+        <text x="90" y="85" text-anchor="middle" class="node-tag">01 · INPUT</text>
+        <text x="90" y="102" text-anchor="middle" class="node-label">Incident Data</text>
+
+        <!-- node: agent -->
+        <rect class="node-box active" x="150" y="170" width="100" height="60" rx="3"></rect>
+        <circle class="pulse" cx="240" cy="180" r="4"></circle>
+        <text x="200" y="195" text-anchor="middle" class="node-tag">02 · AGENTS</text>
+        <text x="200" y="212" text-anchor="middle" class="node-label">Evaluate + Score</text>
+
+        <!-- node: output -->
+        <rect class="node-box done" x="260" y="280" width="100" height="60" rx="3"></rect>
+        <text x="310" y="305" text-anchor="middle" class="node-tag">03 · OUTPUT</text>
+        <text x="310" y="322" text-anchor="middle" class="node-label">Verdict + Evidence</text>
+
+        <!-- node: infra -->
+        <rect class="node-box" x="40" y="280" width="100" height="60" rx="3"></rect>
+        <text x="90" y="305" text-anchor="middle" class="node-tag">CLOUD</text>
+        <text x="90" y="322" text-anchor="middle" class="node-label">AWS · Azure</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <span class="section-num mono">/ 01</span>
+      <h2>About</h2>
+    </div>
+    <div>
+      <p>I'm a software engineer building agentic AI and automation systems for production environments — the kind that run on-call, get reviewed in code review, and get held accountable for the decisions they make.</p>
+      <p>Over the last two years at Accenture I've moved from writing backend services to owning full system designs: a multi-agent platform that reads enterprise incident data and produces scored, justified verdicts instead of another report someone has to read; and a compliance system that watches AWS and Azure infrastructure and remediates issues on its own.</p>
+      <p>I like the translation work as much as the build — taking an ambiguous ask from a stakeholder and turning it into something with clear scalability and reliability trade-offs, then shipping it.</p>
+
+      <div class="spec-list">
+        <div class="spec-row"><span class="k">Based in</span><span class="v">Bengaluru, Karnataka, India</span></div>
+        <div class="spec-row"><span class="k">Focus</span><span class="v">Agentic AI · Backend Systems · Cloud Automation</span></div>
+        <div class="spec-row"><span class="k">Currently</span><span class="v">AI Application Developer, Accenture</span></div>
+        <div class="spec-row"><span class="k">Stack</span><span class="v">Python · LangChain · AWS · Azure · GCP</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num mono">/ 02</span>
+        <h2>Skills</h2>
+      </div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>GenAI &amp; Agentic AI</h3>
+        <ul>
+          <li>Multi-agent orchestration</li>
+          <li>LangChain</li>
+          <li>Vector databases / RAG</li>
+          <li>Prompt engineering</li>
+          <li>Vertex AI</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Engineering</h3>
+        <ul>
+          <li>System &amp; API design</li>
+          <li>Python (production, 2+ yrs)</li>
+          <li>Distributed data pipelines</li>
+          <li>Unit / integration testing</li>
+          <li>Code review</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Cloud &amp; DevOps</h3>
+        <ul>
+          <li>AWS — S3, IAM, Lambda</li>
+          <li>Azure</li>
+          <li>GCP</li>
+          <li>CI/CD — GitHub Actions</li>
+          <li>Monitoring &amp; on-call</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Platforms &amp; Practice</h3>
+        <ul>
+          <li>ServiceNow</li>
+          <li>SQL</li>
+          <li>Git</li>
+          <li>Agile collaboration</li>
+          <li>Stakeholder management</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num mono">/ 03</span>
+        <h2>Experience</h2>
+      </div>
+    </div>
+    <div class="exp-block">
+      <div class="exp-side">
+        <div class="role">Software / AI Application Developer</div>
+        <div class="org">Accenture, Bengaluru</div>
+        <span class="dates">July 2024 — Present</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Designed, architected, and deployed a <b>production-grade multi-agent backend system</b> in Python that evaluates enterprise incident data (ServiceNow) against defined criteria to auto-generate scored, evidence-backed verdicts — cutting manual analysis effort by <b>60–70%</b> and shifting the workflow from manual review to automated execution.</li>
+        <li>Built and maintained <b>reusable, distributed data pipelines</b> and backend service workflows, integrating structured operational data to support scalable automation across multiple internal consumers.</li>
+        <li>Owned architecture and design decisions end-to-end — partnering with senior engineers and cross-functional stakeholders to translate ambiguous business problems into system designs, weighing scalability, maintainability, and performance trade-offs.</li>
+        <li>Designed and built <b>REST APIs and backend services</b> in Python, with rigorous unit/integration testing, code review, and CI/CD (GitHub Actions) for reliable, production-grade releases.</li>
+        <li>Operated deployed systems in production, including <b>on-call troubleshooting</b>, performance tuning, and root-cause analysis across cloud-integrated services (AWS S3, IAM, Lambda) to maintain high availability.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num mono">/ 04</span>
+        <h2>Selected systems</h2>
+      </div>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-top">
+          <span class="proj-domain">Agentic AI</span>
+          <span class="proj-index mono">P01</span>
+        </div>
+        <h3>Agentic Change Verdict Automation</h3>
+        <p>An end-to-end multi-agent Python system that evaluates change-management data against an org-specific knowledge base and auto-generates scored, justified approve/reject verdicts — architected as an execution-layer decision system, not a static report.</p>
+        <div class="proj-tech">
+          <span>Python</span><span>Multi-Agent</span><span>ServiceNow</span><span>Decision Scoring</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <span class="proj-domain">Cloud &amp; Security</span>
+          <span class="proj-index mono">P02</span>
+        </div>
+        <h3>Cloud Compliance &amp; Remediation Automation</h3>
+        <p>A production system that detects and remediates AWS/Azure compliance issues (S3, IAM, logging) end-to-end and produces risk-scored reports — built with full test coverage across detection and remediation logic for safe, repeatable operation at scale.</p>
+        <div class="proj-tech">
+          <span>AWS</span><span>Azure</span><span>IAM</span><span>Automated Remediation</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <span class="proj-domain">GenAI / LLM</span>
+          <span class="proj-index mono">P03</span>
+        </div>
+        <h3>Agentic RCA Automation Platform</h3>
+        <p>A multi-agent pipeline that generates structured root-cause-analysis reports directly from ServiceNow incident data, combining decision agents and validation steps to improve MTTR and audit readiness.</p>
+        <div class="proj-tech">
+          <span>LLM</span><span>RAG</span><span>Decision Agents</span><span>Validation Pipelines</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-top">
+          <span class="proj-domain">Automation</span>
+          <span class="proj-index mono">P04</span>
+        </div>
+        <h3>YouTube Shorts Automation System</h3>
+        <p>A fully automated GenAI pipeline that detects trending topics, writes Hinglish scripts, generates voiceovers, assembles video, and auto-publishes via the YouTube API — zero manual intervention, scheduled with GitHub Actions.</p>
+        <div class="proj-tech">
+          <span>GenAI</span><span>GitHub Actions</span><span>YouTube API</span><span>Content Pipeline</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num mono">/ 05</span>
+        <h2>Certifications</h2>
+      </div>
+    </div>
+    <div class="cert-list">
+      <div class="cert-row"><span class="name">Generative AI Leader</span><span class="org mono">Google Cloud</span></div>
+      <div class="cert-row"><span class="name">Professional Machine Learning Engineer</span><span class="org mono">Google Cloud</span></div>
+      <div class="cert-row"><span class="name">Genwizard Global Agentic AI Bootcamp</span><span class="org mono">Accenture</span></div>
+      <div class="cert-row"><span class="name">CMR Leadership Award</span><span class="org mono">CMR Group of Institutions</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num mono">/ 06</span>
+        <h2>Education</h2>
+      </div>
+    </div>
+    <div class="edu-row">
+      <div class="yr mono">2020—2024</div>
+      <div>
+        <h3>Bachelor of Engineering — Information Science &amp; Technology</h3>
+        <p>CMR Institute of Technology, Bengaluru</p>
+        <div class="coursework">Data Structures &amp; Algorithms · Database Systems · Operating Systems</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="border-bottom:none;">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="section-num mono">/ 07</span>
+      <h2>Let's build<br>something reliable.</h2>
+      <p style="color:var(--ink-dim); margin-top:18px; max-width:380px;">Open to Software Engineer and AI/Automation Engineer roles. Reach out directly — I reply fastest over email or LinkedIn.</p>
+    </div>
+    <div class="contact-list">
+      <a class="contact-item" href="mailto:rummesalmacmrit@gmail.com">
+        <span class="k">Email</span>
+        <span class="v">rummesalmacmrit@gmail.com</span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="contact-item" href="tel:+916360760305">
+        <span class="k">Phone</span>
+        <span class="v">+91 63607 60305</span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="contact-item" href="https://www.linkedin.com/in/umme-salma-r/" target="_blank" rel="noopener">
+        <span class="k">LinkedIn</span>
+        <span class="v">/in/umme-salma-r</span>
+        <span class="arrow">→</span>
+      </a>
+      <a class="contact-item" href="https://github.com/UmmeSalma2022" target="_blank" rel="noopener">
+        <span class="k">GitHub</span>
+        <span class="v">/UmmeSalma2022</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 UMME SALMA — BUILT WITH PYTHON, COFFEE &amp; A FEW TOO MANY AGENTS
+</footer>
+
 </body>
 </html>
